@@ -177,6 +177,7 @@ impl HttpMetricsLayer {
                 let mut buffer = Vec::new();
                 let encoder = TextEncoder::new();
                 encoder.encode(&registry.gather(), &mut buffer).unwrap();
+                encoder.encode(&prometheus::default_registry().gather(), &mut buffer).unwrap();
                 // return metrics
                 String::from_utf8(buffer).unwrap()
             }
